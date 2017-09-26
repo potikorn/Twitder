@@ -96,11 +96,13 @@ class MainActivity : AppCompatActivity(), TweetsAdapter.onClickListener {
         startActivityForResult(intent, PICK_IMAGE_CODE)
     }
 
-    fun uploadImage(bitmap: Bitmap) {
+    private fun uploadImage(bitmap: Bitmap) {
+        ListTweets.add(0, Ticket("0", "him", "url", "loading"))
+        adapter!!.notifyDataSetChanged()
 
         val storage = FirebaseStorage.getInstance()
         val storageRef = storage.getReferenceFromUrl("gs://advancedandroiddevelopment-207.appspot.com")
-        val dateFormat = SimpleDateFormat("ddMMyyHHmmss")
+        val dateFormat = SimpleDateFormat("ddMMyyHHmmss", Locale.getDefault())
         val date = Date()
         val imagePath = "${myEmail!!.splitAssign()}.${dateFormat.format(date)}.jpg"
         val imageRef = storageRef.child("imagePost/$imagePath")
@@ -114,6 +116,8 @@ class MainActivity : AppCompatActivity(), TweetsAdapter.onClickListener {
         }.addOnSuccessListener{ taskSnapShot ->
 
              downloadURL = taskSnapShot.downloadUrl.toString()
+            ListTweets.removeAt(0)
+            adapter!!.notifyDataSetChanged()
 
         }
     }

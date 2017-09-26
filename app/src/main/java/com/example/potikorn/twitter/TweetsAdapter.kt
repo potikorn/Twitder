@@ -39,6 +39,10 @@ class TweetsAdapter(private var context: Context, private var tweetList: ArrayLi
                 view.et_text_post.setText("")
             }
             return view
+
+        }else if (myTweet.tweetPersonUID.equals("loading")){
+            val view = LayoutInflater.from(context).inflate(R.layout.layout_loading, null)
+            return view
         } else {
             var view = LayoutInflater.from(context).inflate(R.layout.layout_posts, null)
             view.txt_tweet_text.text = myTweet.tweetText
