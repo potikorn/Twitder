@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.example.potikorn.twitter.data.Post
 import com.example.potikorn.twitter.data.Ticket
@@ -18,9 +19,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.HashMap
 
-class MainActivity : AppCompatActivity(), TweetsAdapter.onClickListener {
+class MainActivity : AppCompatActivity(), TweetsAdapter.OnClickListener {
 
     private var database = FirebaseDatabase.getInstance()
     private var myRef = database.reference
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity(), TweetsAdapter.onClickListener {
         userUID = b.getString("uid")
 
         //Dummies Data
-        ListTweets.add(Ticket("0", "some text", "imgUrl", "add"))
+        ListTweets.add(Ticket("0", "some text", "imgUrl", "add", 3))
 //        ListTweets.add(Ticket("1", "some text", "imgUrl", "potikorn"))
 //        ListTweets.add(Ticket("2", "some text", "imgUrl", "potikorn"))
 //        ListTweets.add(Ticket("3", "some text", "imgUrl", "potikorn"))
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity(), TweetsAdapter.onClickListener {
         adapter = TweetsAdapter(this, ListTweets)
         adapter!!.onClick(this)
 
-
+        rv_tweets.layoutManager = LinearLayoutManager(this)
         rv_tweets.adapter = adapter
         loadPost()
 
@@ -67,14 +67,16 @@ class MainActivity : AppCompatActivity(), TweetsAdapter.onClickListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot?) {
                         try {
                             ListTweets.clear()
-                            ListTweets.add(Ticket("0", "some text", "imgUrl", "add"))
+                            ListTweets.add(Ticket("0", "some text", "imgUrl", "add", 3))
                             var td = dataSnapshot!!.value as HashMap<String, Any>
                             for (key in td.keys) {
                                 var post = td[key] as HashMap<String, Any>
                                 ListTweets.add(Ticket(key,
                                         post["text"] as String,
                                         post["postImage"] as String?,
-                                        post["userUID"] as String))
+                                        post["userUID"] as String,
+                                        2))
+
                             }
                             adapter!!.notifyDataSetChanged()
                         }catch (ex: Exception) {
@@ -97,7 +99,7 @@ class MainActivity : AppCompatActivity(), TweetsAdapter.onClickListener {
     }
 
     private fun uploadImage(bitmap: Bitmap) {
-        ListTweets.add(0, Ticket("0", "him", "url", "loading"))
+        ListTweets.add(0, Ticket("0", "him", "url", "loading",3))
         adapter!!.notifyDataSetChanged()
 
         val storage = FirebaseStorage.getInstance()
