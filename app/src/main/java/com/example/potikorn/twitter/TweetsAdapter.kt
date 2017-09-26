@@ -17,11 +17,11 @@ class TweetsAdapter(private var context: Context, private var tweetList: ArrayLi
 
     private val database = FirebaseDatabase.getInstance()
     private var myRef = database.reference
-    private var onItemClickListener: OnClickListener? = null
+    private var onItemItemClickListener: OnItemClickListener? = null
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         val tweet = tweetList[position]
-        if (tweet.TYPE == 2) {
+        if (tweet.TYPE == 3) {
             bindTweetViewHolder(holder as TweetViewHolder, tweet)
         } else {
             bindPostViewHolder(holder as PostViewHolder)
@@ -40,7 +40,7 @@ class TweetsAdapter(private var context: Context, private var tweetList: ArrayLi
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (tweetList[position].TYPE == 2) {
+        return if (tweetList[position].TYPE == 3) {
             0
         } else {
             1
@@ -52,8 +52,11 @@ class TweetsAdapter(private var context: Context, private var tweetList: ArrayLi
 
     private fun bindTweetViewHolder(tweetViewHolder: TweetViewHolder, tweet: Ticket) {
         tweetViewHolder.tweetText.text = tweet.tweetText
-        tweetViewHolder.postImage.loadImage(context, tweet.tweetImageUrl)
-
+        if (tweet.tweetImageUrl != null) {
+            tweetViewHolder.postImage.loadImage(context, tweet.tweetImageUrl)
+        } else {
+            tweetViewHolder.postImage.visibility = View.GONE
+        }
         myRef.child("Users").child(tweet.tweetPersonUID)
                     .addValueEventListener(object : ValueEventListener {
                         override fun onDataChange(dataSnapshot: DataSnapshot?) {
@@ -80,21 +83,21 @@ class TweetsAdapter(private var context: Context, private var tweetList: ArrayLi
 
     private fun bindPostViewHolder(postViewHolder: PostViewHolder) {
         postViewHolder.imgAttach.setOnClickListener {
-            onItemClickListener!!.onImageClick()
+            onItemItemClickListener!!.onImageClick()
         }
         postViewHolder.imgPost.setOnClickListener {
             val tweetModel = Post()
             tweetModel.text = postViewHolder.txtMessage.text.toString()
-            onItemClickListener!!.onPostClick(tweetModel)
+            onItemItemClickListener!!.onPostClick(tweetModel)
             postViewHolder.txtMessage.setText("")
         }
     }
 
-    fun onClick(onImageClickListener: OnClickListener) {
-        onItemClickListener = onImageClickListener
+    fun onClick(onImageItemClickListener: OnItemClickListener) {
+        onItemItemClickListener = onImageItemClickListener
     }
 
-    interface OnClickListener {
+    interface OnItemClickListener {
         fun onImageClick()
         fun onPostClick(ticket: Post)
     }

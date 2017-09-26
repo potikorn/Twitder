@@ -20,7 +20,7 @@ import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MainActivity : AppCompatActivity(), TweetsAdapter.OnClickListener {
+class MainActivity : AppCompatActivity(), TweetsAdapter.OnItemClickListener {
 
     private var database = FirebaseDatabase.getInstance()
     private var myRef = database.reference
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity(), TweetsAdapter.OnClickListener {
         userUID = b.getString("uid")
 
         //Dummies Data
-        ListTweets.add(Ticket("0", "some text", "imgUrl", "add", 3))
+        ListTweets.add(Ticket("0", "some text", "imgUrl", "add", 2))
 //        ListTweets.add(Ticket("1", "some text", "imgUrl", "potikorn"))
 //        ListTweets.add(Ticket("2", "some text", "imgUrl", "potikorn"))
 //        ListTweets.add(Ticket("3", "some text", "imgUrl", "potikorn"))
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity(), TweetsAdapter.OnClickListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot?) {
                         try {
                             ListTweets.clear()
-                            ListTweets.add(Ticket("0", "some text", "imgUrl", "add", 3))
+                            ListTweets.add(Ticket("0", "some text", "imgUrl", "add", 2))
                             var td = dataSnapshot!!.value as HashMap<String, Any>
                             for (key in td.keys) {
                                 var post = td[key] as HashMap<String, Any>
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity(), TweetsAdapter.OnClickListener {
                                         post["text"] as String,
                                         post["postImage"] as String?,
                                         post["userUID"] as String,
-                                        2))
+                                        3))
 
                             }
                             adapter!!.notifyDataSetChanged()
@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity(), TweetsAdapter.OnClickListener {
     }
 
     private fun uploadImage(bitmap: Bitmap) {
-        ListTweets.add(0, Ticket("0", "him", "url", "loading",3))
+        ListTweets.add(0, Ticket("0", "him", "url", "loading",1))
         adapter!!.notifyDataSetChanged()
 
         val storage = FirebaseStorage.getInstance()
