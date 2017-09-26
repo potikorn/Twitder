@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "842565264058",
+    "firebase_url": "https://advancedandroiddevelopment-207.firebaseio.com",
+    "project_id": "advancedandroiddevelopment-207",
+    "storage_bucket": "advancedandroiddevelopment-207.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842565264058:android:83b792e26f07bf18",
+        "android_client_info": {
+          "package_name": "com.example.android.sunshine.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "842565264058-icqpstmp33i9huakbi0o58d0e4agp0in.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.sunshine.app",
+            "certificate_hash": "76278b99cd3dd921f230e9d94b79023061b87928"
+          }
+        },
+        {
+          "client_id": "842565264058-jas7sl8pngt3ku0dstf2vi420aj93q34.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA159lJHsgyC9vnvDMzf7Pq1aNmXSBtBHA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "842565264058-jas7sl8pngt3ku0dstf2vi420aj93q34.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842565264058:android:f2d54bd1ff5c1932",
+        "android_client_info": {
+          "package_name": "com.example.potikorn.twitter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "842565264058-mhfh9tt3vad8920rj87qnt4ij4fmc9l1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.potikorn.twitter",
+            "certificate_hash": "f08d2de6b63ed6c9ea963e86ec059e661595e81b"
+          }
+        },
+        {
+          "client_id": "842565264058-jas7sl8pngt3ku0dstf2vi420aj93q34.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA159lJHsgyC9vnvDMzf7Pq1aNmXSBtBHA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "842565264058-jas7sl8pngt3ku0dstf2vi420aj93q34.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
