@@ -11,5 +11,6 @@ class TweetViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
     val tweetText: TextView = itemView!!.findViewById(R.id.txt_tweet_text)
     val avatar: ImageView = itemView!!.findViewById(R.id.img_avatar)
     val postImage: ImageView = itemView!!.findViewById(R.id.img_tweet_post)
+    val dateTime : TextView = itemView!!.findViewById(R.id.txt_tweet_date)
 
 }

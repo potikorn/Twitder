@@ -6,6 +6,7 @@ data class Ticket (
         var tweetText: String? = null,
         var tweetImageUrl: String? = null,
         var tweetPersonUID: String? = null,
+        var date: String? = null,
         var TYPE: Int? = 0
 
 )

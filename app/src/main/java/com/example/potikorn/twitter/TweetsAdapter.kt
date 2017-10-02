@@ -52,33 +52,36 @@ class TweetsAdapter(private var context: Context, private var tweetList: ArrayLi
 
     private fun bindTweetViewHolder(tweetViewHolder: TweetViewHolder, tweet: Ticket) {
         tweetViewHolder.tweetText.text = tweet.tweetText
+//        if (tweet.date != null)
+//            tweet.date = getDayTimeFormat(tweet.date!!)
+        tweetViewHolder.dateTime.text = tweet.date
         if (tweet.tweetImageUrl != null) {
             tweetViewHolder.postImage.loadImage(context, tweet.tweetImageUrl)
         } else {
             tweetViewHolder.postImage.visibility = View.GONE
         }
         myRef.child("Users").child(tweet.tweetPersonUID)
-                    .addValueEventListener(object : ValueEventListener {
-                        override fun onDataChange(dataSnapshot: DataSnapshot?) {
-                            try {
-                                var td = dataSnapshot!!.value as HashMap<String, Any>
-                                for (key in td.keys) {
-                                    var userInfo = td[key] as String
-                                    if (key == "ProfileImage") {
-                                        tweetViewHolder.avatar.loadImage(context, userInfo)
-                                    } else {
-                                        tweetViewHolder.username.text = userInfo
-                                    }
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot?) {
+                        try {
+                            var td = dataSnapshot!!.value as HashMap<String, Any>
+                            for (key in td.keys) {
+                                var userInfo = td[key] as String
+                                if (key == "ProfileImage") {
+                                    tweetViewHolder.avatar.loadImage(context, userInfo)
+                                } else {
+                                    tweetViewHolder.username.text = userInfo
                                 }
-                            } catch (ex: Exception) {
-
                             }
-                        }
-
-                        override fun onCancelled(p0: DatabaseError?) {
+                        } catch (ex: Exception) {
 
                         }
-                    })
+                    }
+
+                    override fun onCancelled(p0: DatabaseError?) {
+
+                    }
+                })
     }
 
     private fun bindPostViewHolder(postViewHolder: PostViewHolder) {
@@ -99,7 +102,7 @@ class TweetsAdapter(private var context: Context, private var tweetList: ArrayLi
 
     interface OnItemClickListener {
         fun onImageClick()
-        fun onPostClick(ticket: Post)
+        fun onPostClick(post: Post)
     }
 
 
